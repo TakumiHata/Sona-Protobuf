@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package audio;
+
+service AudioService {
+  rpc StreamAudio (stream StreamRequest) returns (stream StreamResponse);
+}
+
+message StreamRequest {
+  oneof payload {
+    StreamingConfig streaming_config = 1;
+    bytes audio_data = 2;
+  }
+}
+
+message StreamResponse {
+  string transcript = 1;
+  bool is_final = 2;
+  string speaker = 3;
+}
+
+message StreamingConfig {
+  string encoding = 1;
+  int32 sample_rate_hertz = 2;
+  string language_code = 3;
+  int32 audio_channel_count = 4;
+  string session_id = 5;
+}
