@@ -10,7 +10,13 @@ message StreamRequest {
   oneof payload {
     StreamingConfig streaming_config = 1;
     bytes audio_data = 2;
+    AgendaChange agenda_change = 3;
   }
+}
+
+message AgendaChange {
+  string agenda_id = 1;
+  string agenda_title = 2;
 }
 
 message StreamResponse {
